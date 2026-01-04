@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>יום הולדת שמח - ההרפתקה מתחילה!</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700&display=swap');
+        body { font-family: 'Assistant', sans-serif; background: #fff5f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; text-align: center; overflow-x: hidden; }
+        .page { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 550px; width: 90%; display: none; border: 1px solid #fce4ec; position: relative; z-index: 10; }
+        .active { display: block; animation: fadeIn 0.5s ease; }
+        h1 { color: #d81b60; font-weight: 700; margin-bottom: 20px; }
+        p { font-size: 19px; line-height: 1.6; color: #444; }
+        .math-box { background: #fdf2f8; padding: 20px; border-radius: 15px; margin: 20px 0; text-align: right; border: 1px dashed #f8bbd0; }
+        input { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #f8bbd0; border-radius: 12px; text-align: center; font-size: 18px; outline: none; box-sizing: border-box; }
+        input:focus { border-color: #d81b60; box-shadow: 0 0 8px rgba(216, 27, 96, 0.2); }
+        button { background: #d81b60; color: white; border: none; padding: 12px 35px; border-radius: 25px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; width: 100%; }
+        button:hover { background: #ad1457; transform: scale(1.02); }
+        
+        /* אפקט נצנצים עדין לעמוד הסופי */
+        #p-final h1 { animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="page active" id="p0">
+        <h1>כמעט מזל טוב דנדון שלי! ❤️</h1>
+        <p>השבוע הזה הוא כולו חגיגה אחת גדולה עבורך. אבל כדי להפוך את זה למעניין, שום דבר לא יהיה מובן מאליו.</p>
+        <p>בכל פעם שאנחנו עומדים לצאת לפעילות, את תצטרכי לפצח סדרת חידות כדי לאסוף רמזים. רק בסוף תתבקשי לנחש לאן פנינו מועדות.</p>
+        <p><b>מוכנה לאתגר הראשון?</b></p>
+        <button onclick="go(1)">אני מוכנה, בואי נתחיל!</button>
+    </div>
+
+    <div class="page" id="p1">
+        <h1>רמז 1: האווירה המשתנה</h1>
+        <p>ביום אני הממלכה של כרטיסי ה"סיבוס", מקום רועש עם אלפי אנשים בבנייני זכוכית שמתרוצצים עם תגי עובד.</p>
+        <p>אבל ברגע שהשמש שוקעת, האזור נרגע, האורות של המשרדים נכבים, והרחובות הופכים לשקטים ופסטורליים.</p>
+        <p><b>לאיפה נשים וויז היום?</b></p>
+        <input id="ans1" placeholder="שם האזור/העיר...">
+        <button onclick="check(1, 'הרצליה', 2)">אישור רמז</button>
+    </div>
+
+    <div class="page" id="p2">
+        <h1>רמז 2: הקלאסיקה</h1>
+        <p>הערב אנחנו נוסעים למקום עם אווירה של חו"ל. בלב אזור שבו הכל מתחלף ורץ מהר, הוא עומד כבר מעל עשרים שנה בלי להשתנות.</p>
+        <p>זהו מקום קלאסי עם מראות ענקיות, עיצוב שמרגיש כמו אירופה, ומלצרים בסינרים לבנים ארוכים שנותנים שירות של פעם.</p>
+        <button onclick="go(3)">הבנתי, תן לי את הרמז האחרון</button>
+    </div>
+
+    <div class="page" id="p3">
+        <h1>רמז 3: מתמטיקה של מילים</h1>
+        <p>כדי למצוא את השם של המקום, את צריכה לחבר את החלקים הבאים:</p>
+        <div class="math-box">
+            <b>התחלה:</b> 2 האותיות הראשונות של המילה שמתארת את אבא של אבא.<br><br>
+            <b>אמצע:</b> 3 האותיות האחרונות של הכינוי הכי נפוץ באנגלית ל"חברה הכי טובה" (Bestie).<br><br>
+            <b>סוף:</b> 2 האותיות שחסרות כדי להשלים את המילה "כ _ _" (כמו בביטוי "כן או __").
+        </div>
+        <p>חשבת על השם? עברי לשלב הניחוש.</p>
+        <button onclick="go(4)">לניחוש הסופי!</button>
+    </div>
+
+    <div id="p4" class="page">
+        <h1>הפיצוח הסופי 🔓</h1>
+        <p>אחרי שאספת את כל הרמזים: האזור, הוותק והשם המורכב...</p>
+        <p><b>לאן אני לוקח אותך לחגוג הערב?</b></p>
+        <input type="text" id="finalAns" placeholder="שם המקום...">
+        <button onclick="checkFinal()">פתיחת נעילה</button>
+    </div>
+
+    <div class="page" id="p-final">
+        <h1>בינגו! 🎉</h1>
+        <p>הערב אנחנו פותחים את חגיגות יום ההולדת במסעדת <b>סבסטיאן</b>!</p>
+        <p>השולחן מוזמן, היין מחכה, וכל מה שנשאר לך זה להתלבש יפה.</p>
+        <p><b>אני אוהב אותך ❤️</b></p>
+    </div>
+
+    <script>
+        function go(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p' + id).classList.add('active');
+        }
+
+        function check(id, correct, next) {
+            const val = document.getElementById('ans' + id).value;
+            if(val.includes(correct)) {
+                go(next);
+            } else { 
+                alert("ניחוש יפה, אבל לא... תנסי שוב!"); 
+            }
+        }
+
+        function shootConfetti() {
+            var duration = 5 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) { return clearInterval(interval); }
+                var particleCount = 50 * (timeLeft / duration);
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        function checkFinal() {
+            const val = document.getElementById('finalAns').value.trim();
+            if(val.includes('סבסטיאן') || val.toLowerCase().includes('sebastian')) {
+                go('-final');
+                shootConfetti(); // הפעלת האפקט
+            } else {
+                alert("זה עדיין לא זה... תסתכלי שוב על רמז 3!");
+            }
+        }
+    </script>
+</body>
+</html>
